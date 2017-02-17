@@ -48,11 +48,6 @@ def preprocess():
        set
 
      Some suggestions for preprocessing step:
-     - divide the original data set to training, validation and testing set
-           with corresponding labels
-     - convert original data set from integer to double by using double()
-           function
-     - normalize the data to [0, 1]
      - feature selection"""
 
     mat = loadmat('mnist_all.mat')  # loads the MAT object as a Dictionary
@@ -129,7 +124,11 @@ def preprocess():
     test_data = test_data / 255.0
     test_label = test_label_preprocess[test_perm]
 
+    # Feature selection
+    # Your code here.
+
     print('preprocess done')
+
     return train_data, train_label, validation_data, validation_label, test_data, test_label
 
 
