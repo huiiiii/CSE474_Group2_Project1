@@ -24,8 +24,13 @@ def initializeWeights(n_in, n_out):
 def sigmoid(z):
     """# Notice that z can be a scalar, a vector or a matrix
     # return the sigmoid of input z"""
+    #internal function that allows us to create a vectorized function
+    def sig(x):
+        return 1/(1+np.exp(x))
 
-    return  # your code here
+    f = np.vectorize(sig)
+
+    return  f(z)# effectively applies the sig function to every element in z
 
 
 def preprocess():
@@ -218,7 +223,7 @@ def nnPredict(w1, w2, data):
 
 """**************Neural Network Script Starts here********************************"""
 
-train_data, train_label, validation_data, validation_label, test_data, test_label = preprocess()
+"""train_data, train_label, validation_data, validation_label, test_data, test_label = preprocess()
 
 #  Train Neural Network
 
@@ -276,4 +281,4 @@ predicted_label = nnPredict(w1, w2, test_data)
 
 # find the accuracy on Validation Dataset
 
-print('\n Test set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
+print('\n Test set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')"""
