@@ -5,28 +5,43 @@ from math import sqrt
 import matplotlib.pyplot as plt
 import random
 
-mat = loadmat('./mnist_all.mat')
 
-train9 = mat.get('train9')
+# import nnScript as nn
 
-numOfSamples = 5
+def testPreprocess():
+    mat = loadmat('./mnist_all.mat')
 
-s = random.sample(range(train9.shape[0]),numOfSamples)
+    train9 = mat.get('train9')
 
-fig = plt.figure(figsize=(4,4))
-for i in range(numOfSamples):
-    plt.subplot(2,numOfSamples,i+1)
-    row = train9[s[i],:]
-    # note that each row is a flattened image
-    # we first reshape it to a 28x28 matrix
-    reshaped = np.reshape(row,((28,28)))
-    plt.imshow(reshaped)
-    plt.axis('off')
-    plt.subplot(2,numOfSamples,numOfSamples+i+1)
-    modified = reshaped[3:28, 3:25]
-    plt.imshow(modified)
-    plt.axis('off')
+    numOfSamples = 5
 
-plt.show()
+    s = random.sample(range(train9.shape[0]), numOfSamples)
 
-#exit()
+    fig = plt.figure(figsize=(4, 4))
+
+    numRowsCols = 4 #must be even
+
+    for i in range(numOfSamples):
+        plt.subplot(2, numOfSamples, i + 1)
+        row = train9[s[i], :]
+        # note that each row is a flattened image
+        # we first reshape it to a 28x28 matrix
+        reshaped = np.reshape(row, ((28, 28)))
+        plt.imshow(reshaped)
+        plt.axis('off')
+        plt.subplot(2, numOfSamples, numOfSamples + i + 1)
+
+        resized = np.reshape(row, [28,28])
+        resized = resized[numRowsCols:, int(numRowsCols/2):-int(numRowsCols/2)]
+        resized = resized.flatten()
+        modified = np.reshape(resized, [28-numRowsCols, 28-numRowsCols])
+        plt.imshow(modified)
+        plt.axis('off')
+    plt.show()
+
+testPreprocess()
+
+
+# nn.preprocess()
+
+# exit()

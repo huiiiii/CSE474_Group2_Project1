@@ -25,12 +25,11 @@ def sigmoid(z):
     """# Notice that z can be a scalar, a vector or a matrix
     # return the sigmoid of input z"""
     #internal function that allows us to create a vectorized function
-    def sig(x):
-        return 1/(1+np.exp(x))
+    #def sig(x):
+    #    return 1/(1+np.exp(x))
 
-    f = np.vectorize(sig)
-
-    return  f(z)# effectively applies the sig function to every element in z
+    #f = np.vectorize(sig)
+    return 1.0 / (1.0 + np.exp(-1.0 * z))# applies the sig function to every element in z
 
 
 def preprocess():
@@ -130,7 +129,8 @@ def preprocess():
     test_label = test_label_preprocess[test_perm]
 
     # Feature selection
-    # Your code here.
+    # Reduce the size of the images by deleting edges
+
 
     print('preprocess done')
 
